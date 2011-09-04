@@ -1,0 +1,11 @@
+(ns musicplayer.utils)
+
+(defmacro record 
+  "Dynamic factory for defrecords." 
+  ([name] `(record ~name {}) ) 
+  ([name vals-map] 
+     `(let [con# (first (.getDeclaredConstructors ~name)) 
+            num# (alength (.getParameterTypes con#))] 
+        (merge (.newInstance con# (make-array Object num#)) ~vals-map)))) 
+
+
